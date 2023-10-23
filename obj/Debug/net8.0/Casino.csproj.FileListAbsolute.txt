@@ -13,3 +13,26 @@ C:\Users\EmmyA\Desktop\Book\Casino\obj\Debug\net8.0\refint\Casino.dll
 C:\Users\EmmyA\Desktop\Book\Casino\obj\Debug\net8.0\Casino.pdb
 C:\Users\EmmyA\Desktop\Book\Casino\obj\Debug\net8.0\Casino.genruntimeconfig.cache
 C:\Users\EmmyA\Desktop\Book\Casino\obj\Debug\net8.0\ref\Casino.dll
+C:\Users\Mashe\OneDrive\Рабочий стол\Casino\obj\Debug\net8.0\Casino.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mashe\OneDrive\Рабочий стол\Casino\obj\Debug\net8.0\Casino.AssemblyInfoInputs.cache
+C:\Users\Mashe\OneDrive\Рабочий стол\Casino\obj\Debug\net8.0\Casino.AssemblyInfo.cs
+C:\Users\Mashe\OneDrive\Рабочий стол\Casino\obj\Debug\net8.0\Casino.csproj.CoreCompileInputs.cache
+C:\Users\Mashe\OneDrive\Рабочий стол\Casino\obj\Debug\net8.0\Casino.sourcelink.json
+C:\Users\Mashe\OneDrive\Рабочий стол\Casino\obj\Debug\net8.0\Casino.dll
+C:\Users\Mashe\OneDrive\Рабочий стол\Casino\obj\Debug\net8.0\refint\Casino.dll
+C:\Users\Mashe\OneDrive\Рабочий стол\Casino\obj\Debug\net8.0\Casino.pdb
+C:\School\Casino\obj\Debug\net8.0\Casino.GeneratedMSBuildEditorConfig.editorconfig
+C:\School\Casino\obj\Debug\net8.0\Casino.AssemblyInfoInputs.cache
+C:\School\Casino\obj\Debug\net8.0\Casino.AssemblyInfo.cs
+C:\School\Casino\obj\Debug\net8.0\Casino.csproj.CoreCompileInputs.cache
+C:\School\Casino\obj\Debug\net8.0\Casino.sourcelink.json
+C:\School\Casino\obj\Debug\net8.0\Casino.dll
+C:\School\Casino\obj\Debug\net8.0\refint\Casino.dll
+C:\School\Casino\obj\Debug\net8.0\Casino.pdb
+C:\School\Casino\bin\Debug\net8.0\Casino.exe
+C:\School\Casino\bin\Debug\net8.0\Casino.deps.json
+C:\School\Casino\bin\Debug\net8.0\Casino.runtimeconfig.json
+C:\School\Casino\bin\Debug\net8.0\Casino.dll
+C:\School\Casino\bin\Debug\net8.0\Casino.pdb
+C:\School\Casino\obj\Debug\net8.0\Casino.genruntimeconfig.cache
+C:\School\Casino\obj\Debug\net8.0\ref\Casino.dll

@@ -4,6 +4,7 @@
     {
         static void Main(string[] args)
         {
+            Clear();
             CasinoGame game = new CasinoGame(1000); // Starta Roulett med bestämda priset
             game.StartGame();
  
