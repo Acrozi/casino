@@ -4,8 +4,34 @@ using System.Text;
 
 class CasinoGame
 {
-    private int money;
+public class InputBlocker
+{
+    // Metoden BlockInputForSeconds blockerar input i ett visst antal sekunder.
+    public void BlockInputForSeconds(int seconds)
+    {
+        Console.Clear(); // Rensar konsolen
+        Console.WriteLine("Skriv in rätt val. Vänta " + seconds + " sekunder innan du fortsätter:"); // Skriver ut ett meddelande med den angivna tiden för blockering.
 
+        bool blockInput = true; // indikerar blockering av inmatning.
+        DateTime start = DateTime.Now; // Sparar aktuell tid för att spåra blockeringens tidslängd.
+
+        // Under tiden som det inte har gått det angivna antalet sekunder.
+        while ((DateTime.Now - start).TotalSeconds < seconds)
+        {
+            if (blockInput && Console.KeyAvailable) // Om inmatning är blockerad && det finns tillgängliga tangenter.
+            {
+                while (Console.KeyAvailable)
+                {
+                    Console.ReadKey(true); // Läser in och ignorerar tillgängliga tangenter (utan att visa dem).
+                }
+                blockInput = false; // Efter första inmatningsförsöket låser vi upp inmatningen.
+            }
+        }
+    }
+}
+
+    
+    private int money;
     public CasinoGame(int initialMoney)
     {
         money = initialMoney;
@@ -35,7 +61,7 @@ class CasinoGame
         var r = new Random();
         Console.OutputEncoding = Encoding.UTF8;
         string[] color = { "Red", "Black" };
-        int bet;
+        int bet = 0;
         int attempts = 0;
         int wins = 0;
         int losses = 0;
@@ -56,34 +82,51 @@ class CasinoGame
             Console.WriteLine("(e). Jämnt | (f). Röd | (g). Svart | (h). Ojämnt | (i). 19 till 36\n");
 
             Console.Write("Vad vill du gissa på?(skriv bokstav a-i): ");
-            string choice = Console.ReadLine().ToLower();
+            string choice = Console.ReadLine().ToLower().Trim();
             string choiceDescription = GetChoiceDescription(choice);
-
-            if (choiceDescription == "Ogiltigt val")
+            if (choiceDescription == "Ogiltigt val") // || string.IsNullOrEmpty(choice)
             {
-                Console.Clear();
-                Console.WriteLine("Skriv in rätt val. Vänta 3 sekunder innan du fortsätter:");
+                InputBlocker inputBlocker = new InputBlocker();
+                inputBlocker.BlockInputForSeconds(3);
                 Thread.Sleep(3000);
                 continue;
             }
 
-            Console.Clear();
-            Console.WriteLine("-----------------------------------------   |⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯|");
-            Console.WriteLine($"Hur mycket vill du betta? (min: 10$)          Balans: {money}$ ");
-            Console.WriteLine("-----------------------------------------   |⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯|");
-            Console.Write("Din bet: ");
-            
-            try
+            bool validInput = false;
+            while (!validInput) // om !validInput göra koden nedan
             {
-                bet = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Du måste skriva in siffror. Vänta 3s. ");
-                Thread.Sleep(3000);
                 Console.Clear();
-                continue;
+                Console.WriteLine("-----------------------------------------   |⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯|");
+                Console.WriteLine($"Hur mycket vill du betta? (min: 10$)          Balans: {money}$ ");
+                Console.WriteLine("-----------------------------------------   |⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯|");
+                Console.Write("Din bet: ");
+
+                string input = Console.ReadLine();
+
+                try
+                {
+                    bet = Convert.ToInt32(input);
+                    if (bet > money || bet < 10)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("\n------------------------------------");
+                        Console.WriteLine("Du har inte tillräckligt med pengar eller din bet är för låg");
+                        Console.WriteLine("Tryck någon knapp för att försöka igen");
+                        Console.WriteLine("------------------------------------");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        validInput = true; // om true visa fel genom FormatException och vänta 1 sek
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Du måste skriva in siffror.");
+                    Thread.Sleep(1000);
+                }
             }
+
 
             if (bet > money || bet < 10)
             {
@@ -99,7 +142,7 @@ class CasinoGame
             else
             {
                 money -= bet;
-                int roll = random.Next(0, 37);
+                int roll = random.Next(0, 37);// EU roulette 0 - 36 (37 för att 0 är räknas 1)
                 string randomColor = color[r.Next(color.Length)];
                 bool even = roll % 2 == 0;
 
@@ -115,7 +158,17 @@ class CasinoGame
                     wins++;
                     Console.ReadKey();
                 }
-                else if (choice == "d" && (roll > 0 && roll < 19))
+                else if ((choice == "d" && roll > 1 && roll < 18) || (choice == "i" && roll > 19 && roll < 36))
+                {
+                    Console.WriteLine("\nThe roulette rolled: " + randomColor + " " + roll);
+                    Console.WriteLine("\nWINNER! $" + (bet * 2));
+                    Console.WriteLine("\nPress enter to continue");
+                    Console.WriteLine($"\nDu har gissat på: {GetChoiceDescription(choice)}");
+                    money += (bet * 3);
+                    wins++;
+                    Console.ReadKey();
+                }
+                else if ((choice == "e" && even == true) || (choice == "h" && even == false))
                 {
                     Console.WriteLine("\nThe roulette rolled: " + randomColor + " " + roll);
                     Console.WriteLine("\nWINNER! $" + (bet * 2));
