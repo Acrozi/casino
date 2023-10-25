@@ -4,33 +4,24 @@ using System.Text;
 
 class CasinoGame
 {
-public class InputBlocker
-{
+public class InputBlocker {
     // Metoden BlockInputForSeconds blockerar input i ett visst antal sekunder.
-    public void BlockInputForSeconds(int seconds)
+public void BlockInputForSeconds(int seconds)
+{
+    Console.Clear(); 
+    Console.WriteLine("Du har skrivit in fel val eller input är tom. \nVänta " + seconds + " sekunder innan du fortsätter");
+
+    DateTime start = DateTime.Now; 
+
+    while ((DateTime.Now - start).TotalSeconds < seconds){
+    if (Console.KeyAvailable)
     {
-        Console.Clear(); // Rensar konsolen
-        Console.WriteLine("Skriv in rätt val. Vänta " + seconds + " sekunder innan du fortsätter:"); // Skriver ut ett meddelande med den angivna tiden för blockering.
-
-        bool blockInput = true; // indikerar blockering av inmatning.
-        DateTime start = DateTime.Now; // Sparar aktuell tid för att spåra blockeringens tidslängd.
-
-        // Under tiden som det inte har gått det angivna antalet sekunder.
-        while ((DateTime.Now - start).TotalSeconds < seconds)
-        {
-            if (blockInput && Console.KeyAvailable) // Om inmatning är blockerad && det finns tillgängliga tangenter.
-            {
-                while (Console.KeyAvailable)
-                {
-                    Console.ReadKey(true); // Läser in och ignorerar tillgängliga tangenter (utan att visa dem).
-                }
-                blockInput = false; // Efter första inmatningsförsöket låser vi upp inmatningen.
-            }
-        }
+        var key = Console.ReadKey(true);
     }
-}
+    }
 
-    
+    }
+  }
     private int money;
     public CasinoGame(int initialMoney)
     {
@@ -60,7 +51,7 @@ public class InputBlocker
         Random random = new Random();
         var r = new Random();
         Console.OutputEncoding = Encoding.UTF8;
-        string[] color = { "Red", "Black" };
+        string[] color = { "Svart", "Röd" };
         int bet = 0;
         int attempts = 0;
         int wins = 0;
@@ -68,6 +59,7 @@ public class InputBlocker
 
         while (money != 0)
         {
+            Clear();
             Console.WriteLine("\n                                                |⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯|");
             Console.WriteLine($" -----------------------------------------      |  Förluster: {losses}    |");
             Console.WriteLine($"  <| 3-6-9-12 | 15-18-21-24 | 27-30-33-36 |>    |  Vinster: {wins}      |");
@@ -82,14 +74,16 @@ public class InputBlocker
             Console.WriteLine("(e). Jämnt | (f). Röd | (g). Svart | (h). Ojämnt | (i). 19 till 36\n");
 
             Console.Write("Vad vill du gissa på?(skriv bokstav a-i): ");
-            string choice = Console.ReadLine().ToLower().Trim();
+            string choice = Console.ReadLine()
+                                   .ToLower()
+                                   .Trim();
             string choiceDescription = GetChoiceDescription(choice);
-            if (choiceDescription == "Ogiltigt val") // || string.IsNullOrEmpty(choice)
+            if (choiceDescription == "Ogiltigt val" || string.IsNullOrWhiteSpace(choice)) // || string.IsNullOrEmpty(choice)
             {
                 InputBlocker inputBlocker = new InputBlocker();
                 inputBlocker.BlockInputForSeconds(3);
                 Thread.Sleep(3000);
-                continue;
+                
             }
 
             bool validInput = false;
@@ -101,7 +95,7 @@ public class InputBlocker
                 Console.WriteLine("-----------------------------------------   |⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯|");
                 Console.Write("Din bet: ");
 
-                string input = Console.ReadLine();
+                string input = Console.ReadLine(); // fixa
 
                 try
                 {
@@ -150,6 +144,7 @@ public class InputBlocker
                     (choice == "b" && roll > 12 && roll < 25) || 
                     (choice == "c" && roll > 24 && roll < 37))
                 {
+                    Clear();
                     Console.WriteLine("\nThe roulette rolled: " + randomColor + " " + roll);
                     Console.WriteLine("\nWINNER! $" + (bet * 2));
                     Console.WriteLine("\nPress enter to continue");
@@ -160,6 +155,7 @@ public class InputBlocker
                 }
                 else if ((choice == "d" && roll > 1 && roll < 18) || (choice == "i" && roll > 19 && roll < 36))
                 {
+                    Clear();
                     Console.WriteLine("\nThe roulette rolled: " + randomColor + " " + roll);
                     Console.WriteLine("\nWINNER! $" + (bet * 2));
                     Console.WriteLine("\nPress enter to continue");
@@ -170,6 +166,7 @@ public class InputBlocker
                 }
                 else if ((choice == "e" && even == true) || (choice == "h" && even == false))
                 {
+                    Clear();
                     Console.WriteLine("\nThe roulette rolled: " + randomColor + " " + roll);
                     Console.WriteLine("\nWINNER! $" + (bet * 2));
                     Console.WriteLine("\nPress enter to continue");
@@ -180,6 +177,7 @@ public class InputBlocker
                 }
                 else if ((choice == "f" && randomColor == "Red") || (choice == "g" && randomColor == "Black"))
                 {
+                    Clear();
                     Console.WriteLine("\nThe roulette rolled: " + randomColor + " " + roll);
                     Console.WriteLine("\nWINNER! $" + (bet * 2));
                     Console.WriteLine("\nPress enter to continue");
@@ -190,11 +188,12 @@ public class InputBlocker
                 }
                 else
                 {
+                Clear();
                 losses++;
-                WriteLine($"\nYou lost ${bet}");
+                WriteLine($"\n\nDu förlorade: {bet}$");
                 WriteLine($"Det blev: {randomColor} {roll}");
-                WriteLine("Press enter to continue. ");
-                WriteLine($"\nDu har gissat på: {GetChoiceDescription(choice)}");
+                WriteLine($"Du gissade på: {GetChoiceDescription(choice)}");
+                WriteLine("\nTryck något för att fortsätta. ");
                 ReadKey();
                 Clear();
                 }
