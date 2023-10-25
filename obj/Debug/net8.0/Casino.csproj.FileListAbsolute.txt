@@ -36,3 +36,7 @@ C:\School\Casino\bin\Debug\net8.0\Casino.dll
 C:\School\Casino\bin\Debug\net8.0\Casino.pdb
 C:\School\Casino\obj\Debug\net8.0\Casino.genruntimeconfig.cache
 C:\School\Casino\obj\Debug\net8.0\ref\Casino.dll
+C:\School\Casino\bin\Debug\net8.0\Dapper.dll
+C:\School\Casino\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\School\Casino\obj\Debug\net8.0\Casino.csproj.AssemblyReference.cache
+C:\School\Casino\obj\Debug\net8.0\Casino.csproj.CopyComplete

@@ -11,4 +11,9 @@
  <Using Include="System.Console" Static="true" />
 </ItemGroup>
 
+<ItemGroup>
+  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  <PackageReference Include="Dapper" Version="2.0.90" />
+</ItemGroup>
+
 </Project>
