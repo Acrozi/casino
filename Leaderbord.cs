@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Newtonsoft.Json;
+using Newtonsoft.Json; // För JSON 
 
 public class Leaderboard
 {
@@ -44,7 +40,7 @@ public class Leaderboard
         Clear(); // Rensa konsolen innan leaderboard visas
         var sortedPlayers = players.OrderByDescending(p => p.Balance).ToList(); // Sortera spelare efter balans i fallande ordning
 
-        Console.WriteLine("Ledartavla:\n");
+        Console.WriteLine("Leaderboard:\n");
         foreach (var player in sortedPlayers)
         {
             // Visa information om varje spelare på skärmen
