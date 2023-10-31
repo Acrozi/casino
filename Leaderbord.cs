@@ -1,4 +1,8 @@
 using Newtonsoft.Json; // För JSON 
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Newtonsoft.Json;
 
 public class Leaderboard
 {
@@ -15,7 +19,7 @@ public class Leaderboard
     public void AddPlayer(PlayerData player)
     {
         // Letar efter en befintlig spelare med samma namn
-        var existingPlayer = players.FirstOrDefault(p => p.Name == player.Name);
+        var existingPlayer = players.FirstOrDefault(p => p.Name == player.Name); // söka efter spelare. Om sådan hittas = returnera spelare eller returnera null
 
         if (existingPlayer != null)
         {
