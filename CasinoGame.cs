@@ -1,4 +1,4 @@
-using System.Text;
+using System.Text; // for encoding 
 
 class CasinoGame
 {
@@ -9,7 +9,7 @@ class CasinoGame
         money = initialMoney;
     }
 
-    private string GetChoiceDescription(string choice)
+    private string GetChoiceDescription(string choice) // "Switch Expression med Lambda
     {
         return choice switch
         {
@@ -27,13 +27,11 @@ class CasinoGame
     }
 
 
-
     public void StartGame()
     {
-        ForegroundColor = ConsoleColor.Yellow;
-        Random random = new Random();
-        Random r = new Random();
-        OutputEncoding = Encoding.UTF8;
+        ForegroundColor = ConsoleColor.Yellow; // Färg till gult
+        Random random = new Random(); // För att generera slumpmässigt tal
+        OutputEncoding = Encoding.UTF8; // för ⎯⎯⎯⎯⎯⎯⎯
         string[] color = { "Svart", "Röd" };
         int bet = 0;
         int attempts = 0;
@@ -50,12 +48,12 @@ class CasinoGame
                 username = ReadLine().Trim();
                 if (string.IsNullOrWhiteSpace(username)) {
                 WriteLine("Du måste ange ditt namn!");
-                InputBlocker inputBlocker = new InputBlocker();
-                inputBlocker.BlockInputForSeconds(3);
+                InputBlocker inputBlocker = new InputBlocker(); // cooldown
+                inputBlocker.BlockInputForSeconds(3); // cooldown
                 continue;
             } 
            }
-            Clear();
+            Clear(); // clear screen
             WriteLine($"\n\n>  Välkommen, {username}!  <");
             WriteLine(" -----------------------------------------      |⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯|");
             WriteLine($"  <| 3-6-9-12 | 15-18-21-24 | 27-30-33-36 |>    | Förluster: {losses} |");
@@ -71,50 +69,33 @@ class CasinoGame
 
             Write("Vad vill du gissa på? (skriv bokstav a-i): ");
             string choice = ReadLine().ToLower().Trim();
-            string choiceDescription = GetChoiceDescription(choice);
 
+            string choiceDescription = GetChoiceDescription(choice);
             if (choiceDescription == "Ogiltigt val" || string.IsNullOrWhiteSpace(choice))
             {
-                InputBlocker inputBlocker = new InputBlocker();
-                inputBlocker.BlockInputForSeconds(3);
+                InputBlocker inputBlocker = new InputBlocker(); // cooldown
+                inputBlocker.BlockInputForSeconds(3); // cooldown 3s
                 continue;
             }
-
-            bool validInput = false;
-
-            while (!validInput)
-            {
+                bool validInput = false;
+                while (!validInput)
+                {
                 Clear();
                 WriteLine("-----------------------------------------   |⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯|");
                 WriteLine($"Hur mycket vill du betta? (min: 10$)          Balans: {money}$ ");
                 WriteLine("-----------------------------------------   |⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯|");
                 Write("Din bet: ");
-
                 string input = ReadLine();
-
                 try
                 {
                     bet = Convert.ToInt32(input);
-
-                    if (bet > money || bet < 10)
-                    {
-                        Clear();
-                        WriteLine("\n------------------------------------");
-                        WriteLine("Du har inte tillräckligt med pengar eller din bet är för låg");
-                        WriteLine("Tryck någon knapp för att försöka igen");
-                        WriteLine("------------------------------------");
-                        ReadKey();
-                    }
-                    else
-                    {
-                        validInput = true;
-                    }
                 }
                 catch (FormatException)
                 {
                     WriteLine("Du måste skriva in siffror.");
+                    ReadKey();
+                    continue; // fortsätta loop
                 }
-            }
 
             if (bet > money || bet < 10)
             {
@@ -125,14 +106,15 @@ class CasinoGame
                 WriteLine("------------------------------------");
                 ReadKey();
                 Clear();
-                continue;
+                
             }
             else
             {
+                validInput = true;
                 money -= bet;
                 int roll = random.Next(0, 37);
-                string randomColor = color[r.Next(color.Length)];
-                bool even = roll % 2 == 0;
+                string randomColor = color[random.Next(color.Length)];
+                bool even = roll % 2 == 0; // kollar om talet är jämnt
 
                 if ((choice == "a" && roll > 0 && roll < 13) ||
                     (choice == "b" && roll > 12 && roll < 25) ||
@@ -196,7 +178,6 @@ class CasinoGame
                     ReadKey();
                     Clear();
                 }
-
                 attempts++;
                 if (money == 0)
                 {
@@ -208,6 +189,7 @@ class CasinoGame
                 }
             }
         }
+      }
     }
 
     public class InputBlocker
@@ -219,9 +201,9 @@ class CasinoGame
 
             DateTime start = DateTime.Now;
 
-            while ((DateTime.Now - start).TotalSeconds < seconds) // om inte sant avbryter
+            while ((DateTime.Now - start).TotalSeconds < seconds) 
             {
-                if (KeyAvailable)
+                if (KeyAvailable) // kollar om det finns tillgängliga tangenter
                 {
                     var key = ReadKey(true);
                 }

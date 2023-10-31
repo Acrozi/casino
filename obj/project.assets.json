@@ -84,19 +84,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Mashe\\.nuget\\packages\\": {}
+    "C:\\Users\\EmmyA\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\School\\Casino\\Casino.csproj",
+      "projectUniqueName": "C:\\Users\\EmmyA\\Desktop\\Book\\casino\\Casino.csproj",
       "projectName": "Casino",
-      "projectPath": "C:\\School\\Casino\\Casino.csproj",
-      "packagesPath": "C:\\Users\\Mashe\\.nuget\\packages\\",
-      "outputPath": "C:\\School\\Casino\\obj\\",
+      "projectPath": "C:\\Users\\EmmyA\\Desktop\\Book\\casino\\Casino.csproj",
+      "packagesPath": "C:\\Users\\EmmyA\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\EmmyA\\Desktop\\Book\\casino\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Mashe\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\EmmyA\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -114,6 +114,9 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "default"
       }
     },
     "frameworks": {
@@ -145,7 +148,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-rc.2.23502.2/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-preview.7.23376.3\\RuntimeIdentifierGraph.json"
       }
     }
   }
